@@ -58,7 +58,9 @@ for i in range(0, int(CLIP_FRAMES/4)+1):
     path = "frames/frame"+str(i*4)+".jpg" #<--- path to folder containing every frame of the video
     frames.append(runner(path))
 
-client = discord.Client()
+intents = discord.Intents.default()
+intents.message_content = True
+client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
