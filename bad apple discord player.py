@@ -2,13 +2,19 @@ import discord
 import time
 from PIL import Image
 
-CLIP_FRAMES = 6571
+CONFIG = open('config.txt', 'rt')
 
-CLIP_LENGTH = 219.0666
+FRAMES_PATH = CONFIG.readline().split(' ')[2:][0][:-1] #Get thing after the space after = on line 1 but not the new line charecter
+
+TOKEN = CONFIG.readline().split(' ')[2:][0][:-1] #each time readline is called it just get's the next line so, yeah
+
+CLIP_FRAMES = int(CONFIG.readline().split(' ')[2:][0][:-1])
+
+CLIP_LENGTH = float(CONFIG.readline().split(' ')[2:][0][:-1])
+
+CONFIG.close()
 
 ASCII_CHARS = ['⠀','⠄','⠆','⠖','⠶','⡶','⣩','⣪','⣫','⣾','⣿']
-ASCII_CHARS.reverse()
-ASCII_CHARS = ASCII_CHARS[::-1]
 
 WIDTH = 60
 
@@ -55,7 +61,7 @@ def runner(path):
 frames = []
 
 for i in range(0, int(CLIP_FRAMES/4)+1):
-    path = "frames/frame"+str(i*4)+".jpg" #<--- path to folder containing every frame of the video
+    path = f"{FRAMES_PATH}/frame"+str(i*4)+".jpg" #<--- path to folder containing every frame of the video
     frames.append(runner(path))
 
 intents = discord.Intents.default()
@@ -86,7 +92,7 @@ async def on_message(message):
                 newTimestamp = time.time()
                 if (newTimestamp - oldTimestamp) >= TIMEOUT:
 
-                    await message.channel.send(frames[int(i)])
+                    await message.channel.send(f'```{frames[int(i)]}```') #added `````` for markdown so it's monospace
                     
                     newTimestamp = time.time()
 
@@ -95,5 +101,4 @@ async def on_message(message):
                     oldTimestamp = newTimestamp
 
                     disp = True
-
-client.run('')#<--- Put bot token here
+client.run(TOKEN)
