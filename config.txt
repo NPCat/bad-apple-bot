@@ -1,0 +1,9 @@
+FRAMES_FOLDER = frames
+TOKEN = PUT_TOKEN_HERE
+CLIP_FRAMES = 6571
+CLIP_LENGTH = 219.0666
+
+Clip frames & length defaulted to that of Bad Apple
+
+Technically you can put whatever you want before the equal just no spaces and you have to have spaces before and after the '=' :3
+Oh and I guess the line order is also specific but eh ¯\_(ツ)_/¯
