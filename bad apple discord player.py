@@ -1,4 +1,5 @@
 import discord
+from discord.ext import commands
 import time
 from PIL import Image
 
@@ -60,40 +61,32 @@ for i in range(0, int(CLIP_FRAMES/4)+1):
 
 intents = discord.Intents.default()
 intents.message_content = True
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix="!", intents=intents)
 
-@client.event
+@bot.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
-@client.event
-async def on_message(message):
+@bot.command(name="bad apple")
+async def badapple(ctx):
+    oldTimestamp = time.time()
 
-    if message.content.startswith('!bad apple'):
+    start = oldTimestamp
+
+    seconds = 0
+    minutes = 0
+    i = 0
         
-        oldTimestamp = time.time()
-
-        start = oldTimestamp
-
-        seconds = 0
-        minutes = 0
-
-        i = 0
-        
-        while i < len(frames)-1:
-            disp = False
-            while not disp:
+    while i < len(frames)-1:
+        disp = False
+        while not disp:
+            newTimestamp = time.time()
+            if (newTimestamp - oldTimestamp) >= TIMEOUT:
+                await message.channel.send(frames[int(i)])                  
                 newTimestamp = time.time()
-                if (newTimestamp - oldTimestamp) >= TIMEOUT:
 
-                    await message.channel.send(frames[int(i)])
-                    
-                    newTimestamp = time.time()
+                i += (newTimestamp - oldTimestamp)/TIMEOUT
+                oldTimestamp = newTimestamp
+                disp = True
 
-                    i += (newTimestamp - oldTimestamp)/TIMEOUT
-                    
-                    oldTimestamp = newTimestamp
-
-                    disp = True
-
-client.run('')#<--- Put bot token here
+bot.run('')#<--- Put bot token here
