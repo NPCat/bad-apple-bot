@@ -65,7 +65,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print(f'I have logged in as {client} (ID: {client.id})')
 
 @bot.command(name="bad apple")
 async def badapple(ctx):
@@ -78,8 +78,7 @@ async def badapple(ctx):
     i = 0
         
     while i < len(frames)-1:
-        disp = False
-        while not disp:
+        while True:
             newTimestamp = time.time()
             if (newTimestamp - oldTimestamp) >= TIMEOUT:
                 await message.channel.send(frames[int(i)])                  
@@ -87,6 +86,6 @@ async def badapple(ctx):
 
                 i += (newTimestamp - oldTimestamp)/TIMEOUT
                 oldTimestamp = newTimestamp
-                disp = True
+                break
 
 bot.run('')#<--- Put bot token here
