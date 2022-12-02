@@ -15,7 +15,7 @@ This is `pip install -U -r requirements.txt`
 
 Go into `bad apple discord player.py` and scroll to the bottom line. Put your discord bot's discord token in. If you don't know where your token is, consider google :)
 
-Next, go into `vid to frames.py` and run it. **This will take about a minute depending on your computer, just be patient.**
+Next, go into `video to frames.py` and run it. **This will take about a minute depending on your computer, just be patient.**
 
 # Running
 (assuming you are using python version 3.8, put whatever version you installed after the dash)
