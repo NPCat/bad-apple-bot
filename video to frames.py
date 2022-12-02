@@ -12,7 +12,7 @@ def FrameCapture(path):
 
         success, image = vidObj.read() 
   
-        cv2.imwrite("frame%d.jpg" % count, image)
+        cv2.imwrite("frames\\frame%d.jpg" % count, image)
   
         count += 1
   
