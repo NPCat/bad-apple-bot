@@ -70,7 +70,7 @@ async def on_ready():
 async def on_message(message):
 
     if message.content.startswith('!bad apple'):
-        
+        message.channel.send('very bad')
         oldTimestamp = time.time()
 
         start = oldTimestamp
@@ -85,8 +85,7 @@ async def on_message(message):
             while not disp:
                 newTimestamp = time.time()
                 if (newTimestamp - oldTimestamp) >= TIMEOUT:
-
-                    await message.channel.send(frames[int(i)])
+                    await message.edit(content=frames[int(i)])
                     
                     newTimestamp = time.time()
 
