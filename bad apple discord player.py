@@ -65,7 +65,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f'I have logged in as {client} (ID: {client.id})')
+    print(f'I have logged in as {bot} (ID: {bot.id})')
 
 @bot.command(name="bad apple")
 async def badapple(ctx):
